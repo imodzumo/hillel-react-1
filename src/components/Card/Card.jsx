@@ -1,6 +1,7 @@
 import './styles.css';
 
 const Card = ({ courses }) => {
+    const {image, title, level, isMyCourse, finishedModules, user, rating, students, duration} = courses;
 
     const numberOfModules = 10;
     function numberToTime(number) {
@@ -11,43 +12,40 @@ const Card = ({ courses }) => {
 
     return (
         <div className="card__container">
-            {courses.map(course =>
-                <div key={course.id} className="card">
-                    <div className="image__container">
-                        <img src={course.image} alt={course.title}/>
-                        <div className="level">{ course.level }</div>
-                    </div>
-                    <h3 className="card__title">{ course.title }</h3>
+            <div className="card">
+                <div className="image__container">
+                    <img src={image} alt={title}/>
+                    <div className="level">{ level }</div>
+                </div>
+                <h3 className="card__title">{ title }</h3>
 
-                    {course.isMyCourse
-                        &&
-                        <div>
-                            <progress value={course.finishedModules} max={numberOfModules}/>
-                            <div className="card__info">
-                                <p>{course.finishedModules} / {numberOfModules} Modules</p>
-                                <div>{course.finishedModules/numberOfModules*100}%</div>
-                            </div>
-                        </div>
-                    }
-
-                    <div className="card__info">
-                        <div className="user">
-                            <img src={course.user.avatar} alt={course.user.name}/>
-                            <p>{course.user.name}</p>
-                        </div>
-                        <div className="rating">
-                            <p>{course.rating}</p>
+                {isMyCourse
+                    &&
+                    <div>
+                        <progress value={finishedModules} max={numberOfModules}/>
+                        <div className="card__info">
+                            <p>{finishedModules} / {numberOfModules} Modules</p>
+                            <div>{finishedModules/numberOfModules*100}%</div>
                         </div>
                     </div>
+                }
 
-                    <div className="card__info">
-                        <div>{course.students} students</div>
-                        <div>{course.finishedModules} Modules</div>
-                        <div>{ numberToTime(course.duration) }</div>
+                <div className="card__info">
+                    <div className="user">
+                        <img src={user.avatar} alt={user.name}/>
+                        <p>{user.name}</p>
+                    </div>
+                    <div className="rating">
+                        <p>{rating}</p>
                     </div>
                 </div>
 
-                )}
+                <div className="card__info">
+                    <div>{students} students</div>
+                    <div>{finishedModules} Modules</div>
+                    <div>{ numberToTime(duration) }</div>
+                </div>
+            </div>
         </div>
     )
 }
