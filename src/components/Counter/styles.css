@@ -1,0 +1,49 @@
+.counter-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.count-display {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.increment {
+    background-color: #4CAF50;
+}
+
+.increment:hover {
+    background-color: #45a049;
+}
+
+.decrement {
+    background-color: #f44336;
+}
+
+.decrement:hover {
+    background-color: #da190b;
+}
+
+.reset {
+    background-color: #555555;
+}
+
+.reset:hover {
+    background-color: #333333;
+}
