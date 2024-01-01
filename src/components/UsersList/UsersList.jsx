@@ -7,9 +7,20 @@ const UsersList = () => {
     const [selectedUserId, setSelectedUserId] = useState(null);
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(data => setUsers(data));
+        const getUsers = async ()=> {
+            try {
+                const res = await fetch('https://jsonplaceholder.typicode.com/users')
+                if (!res.ok) {
+                    throw new Error("Failed to fetch")
+                }
+                const data = await res.json()
+                setUsers(data);
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+        getUsers();
     }, []);
 
     const toggleUserDetails = (userId) => {
