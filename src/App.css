@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0 auto;
 }
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -13,4 +14,126 @@ body {
   padding: 20px;
   display: flex;
   justify-content: space-around;
+}
+
+.button-link {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.button-link:hover {
+  background-color: #0056b3;
+}
+
+/*Users*/
+.users-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*UsersList*/
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grid-header {
+  display: contents;
+}
+
+.grid-header div {
+  font-weight: bold;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #eee;
+}
+
+.grid-row {
+  display: contents;
+  text-decoration: none;
+  color: inherit;
+}
+
+.grid-row div {
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #eee;
+}
+
+.grid-row:hover div {
+  background-color: #e3f2fd;
+}
+
+.grid-row:nth-child(even) div {
+  background-color: #f9f9f9;
+}
+
+.grid-row:nth-child(even):hover div {
+  background-color: #e3f2fd;
+}
+
+.grid-row:nth-child(odd) div {
+  background-color: white;
+}
+
+.grid-row:nth-child(odd):hover div {
+  background-color: #e3f2fd;
+}
+
+/*UserPage*/
+.user-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-details {
+  padding: 15px;
+  margin-bottom: 10px;
+  max-width: 600px;
+  background-color: white;
+  border: 1px solid darkgrey;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*PageNotFound*/
+/*Home*/
+.homepage-container, .page-notFound-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f4f8;
+}
+
+.homepage-header, .page-notFound-header {
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.homepage-header h1 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.homepage-header p {
+  color: #555;
+  margin-bottom: 20px;
 }
