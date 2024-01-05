@@ -1,10 +1,11 @@
+import Widget from "./Widget.jsx";
 
 const Home = ()=> {
 
 
     return (
         <div>
-            <div>Home</div>
+            <Widget />
         </div>
     );
 }
