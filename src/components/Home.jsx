@@ -1,11 +1,10 @@
-import Widget from "./Widget.jsx";
+import Wrapper from "./Wrapper.jsx";
 
 const Home = ()=> {
 
-
     return (
         <div>
-            <Widget />
+            <Wrapper />
         </div>
     );
 }

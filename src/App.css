@@ -14,3 +14,29 @@ body {
   display: flex;
   justify-content: space-around;
 }
+
+.todo-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid darkgrey;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.checkbox {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  width: 60px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.active {
+  background-color: green;
+}
+.title {
+  margin-left: 10px;
+}
