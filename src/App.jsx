@@ -1,25 +1,48 @@
 import './App.css'
-import Input from "./components/Input/Input.jsx";
-import Popup from "./components/Popup/Popup.jsx";
-import {useState} from "react";
+import {useCallback, useMemo, useState} from "react";
+import Box from "./components/Box.jsx";
+import UserList from "./components/UserList.jsx";
 
 const App = () => {
-    const [name, setName] = useState('');
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-    const handleNameSubmit = (enteredName) => {
-        setName(enteredName);
-        setIsPopupOpen(true);
-    };
+    const [count, setCount] = useState(0);
 
-    const closePopup = () => {
-        setIsPopupOpen(false);
-    };
+
+    // const sayHelloFromBoxComponent = useCallback(()=> {
+    //     console.log("Hello", count)
+    // }, [count]);
+
+    // const users = [
+    //     {id: 1, username: "Username 1"},
+    //     {id: 2, username: "Username 2"},
+    //     {id: 3, username: "Username 3"},
+    // ]
+
+    // const memoUsers = useMemo(()=> [
+    //     {id: 1, username: "Username 1"},
+    //     {id: 2, username: "Username 2"},
+    //     {id: 3, username: "Username 3"},
+    // ], [])
+
+    const users = useMemo(()=> [
+        {id: 1, username: "Username 1"},
+        {id: 2, username: "Username 2"},
+        {id: 3, username: "Username 3"},
+    ],[])
+
+    const memoUsers = useMemo(()=>
+        users.map(user => user.username.toUpperCase())
+        , [users])
 
     return (
-        <div className="main-container">
-            {!isPopupOpen && <Input onNameSubmit={handleNameSubmit} />}
-            {isPopupOpen && <Popup name={name} onClose={closePopup} />}
+        <div className="main__container">
+            <h1>Count: {count}</h1>
+            <button onClick={()=> setCount(count + 1)}>Increment</button>
+
+            <ul>
+                {memoUsers.map(user => <li key={user.username}>{user}</li>)}
+            </ul>
+            <UserList users={memoUsers}/>
         </div>
     );
 }
