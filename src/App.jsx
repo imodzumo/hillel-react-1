@@ -1,48 +1,55 @@
 import './App.css'
-import {useCallback, useMemo, useState} from "react";
-import Box from "./components/Box.jsx";
-import UserList from "./components/UserList.jsx";
+import {useReducer, useState} from "react";
+import {Decrement, Increment} from "./actions/actions.js";
+import { increment, decrement } from "./actions/actionCreators.js"
 
 const App = () => {
+    //
+    // const [count, setCount] = useState(0)
+    //
+    // const handleIncrement = ()=> {
+    //     setCount(count + 1)
+    // }
+    // const handleDecrement = ()=> {
+    //     setCount(count - 1)
+    // }
 
-    const [count, setCount] = useState(0);
+    const reducer = (state, action)=> {
+        switch (action.type) {
+            case Increment:
+                return {
+                    ...state,
+                    value: state.value + 1
+                };
+            case Decrement:
+                return {
+                    ...state,
+                    value: state.value - 1
+                };
+            default:
+                return state;
+        }
+    }
+    const initialState = {
+        value: 1,
+        counterId: 10,
+    };
+    const [state, dispatch] = useReducer(reducer, initialState);
 
-
-    // const sayHelloFromBoxComponent = useCallback(()=> {
-    //     console.log("Hello", count)
-    // }, [count]);
-
-    // const users = [
-    //     {id: 1, username: "Username 1"},
-    //     {id: 2, username: "Username 2"},
-    //     {id: 3, username: "Username 3"},
-    // ]
-
-    // const memoUsers = useMemo(()=> [
-    //     {id: 1, username: "Username 1"},
-    //     {id: 2, username: "Username 2"},
-    //     {id: 3, username: "Username 3"},
-    // ], [])
-
-    const users = useMemo(()=> [
-        {id: 1, username: "Username 1"},
-        {id: 2, username: "Username 2"},
-        {id: 3, username: "Username 3"},
-    ],[])
-
-    const memoUsers = useMemo(()=>
-        users.map(user => user.username.toUpperCase())
-        , [users])
+    const handleIncrement = ()=> {
+        dispatch(increment());
+    }
+    const handleDecrement = ()=> {
+        dispatch(decrement());
+    }
 
     return (
         <div className="main__container">
-            <h1>Count: {count}</h1>
-            <button onClick={()=> setCount(count + 1)}>Increment</button>
-
-            <ul>
-                {memoUsers.map(user => <li key={user.username}>{user}</li>)}
-            </ul>
-            <UserList users={memoUsers}/>
+            <div>
+                <h1>Count: {state.value}</h1>
+                <button onClick={handleIncrement}>Increment</button>
+                <button onClick={handleDecrement}>Decrement</button>
+            </div>
         </div>
     );
 }
