@@ -9,6 +9,9 @@ import MenuItem from "./components/MenuItem.jsx";
 import {NavLink, Route, Routes} from "react-router-dom";
 import Cart from "./pages/Cart.jsx";
 import Menu from "./pages/Menu.jsx";
+import Users from "./pages/Users.jsx";
+import Todos from "./pages/Todos.jsx";
+import Posts from "./pages/Posts.jsx";
 
 const App = () => {
 
@@ -68,14 +71,20 @@ const App = () => {
             {/*}*/}
 
             <nav>
-                <NavLink to="/menu">Menu</NavLink>
-                <br/>
-                <NavLink to="/cart">Cart</NavLink>
+                {/*<NavLink to="/menu">Menu</NavLink>*/}
+                {/*<NavLink to="/cart">Cart</NavLink>*/}
+                <NavLink to="/users">Users</NavLink>
+                <NavLink to="/todos">Todos</NavLink>
+                <NavLink to="/posts">Posts</NavLink>
             </nav>
 
             <Routes>
-                <Route path="/menu" element={<Menu />}></Route>
-                <Route path="/cart" element={<Cart />}></Route>
+                <Route path="/users" element={<Users />}></Route>
+                <Route path="/todos" element={<Todos />}></Route>
+                <Route path="/posts" element={<Posts />}></Route>
+
+                {/*<Route path="/menu" element={<Menu />}></Route>*/}
+                {/*<Route path="/cart" element={<Cart />}></Route>*/}
             </Routes>
         </div>
     );
