@@ -1,91 +1,56 @@
 import './App.css'
-import {useEffect, useReducer, useState} from "react";
-import {Decrement, Increment} from "./actions/actions.js";
-import {increment, decrement} from "./actions/actionsCreator.js";
-import {useDispatch, useSelector} from "react-redux";
-import {login, logout} from "./redux/slices/authSlice.js";
-import {PIZZA_API} from "./constants.js"
-import MenuItem from "./components/MenuItem.jsx";
-import {NavLink, Route, Routes} from "react-router-dom";
-import Cart from "./pages/Cart.jsx";
-import Menu from "./pages/Menu.jsx";
-import Users from "./pages/Users.jsx";
-import Todos from "./pages/Todos.jsx";
-import Posts from "./pages/Posts.jsx";
+import Form from "./components/Form.jsx";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import {validationSchema} from "./validationSchema.js";
+import Input from "./components/Input.jsx";
+
 
 const App = () => {
+    const {register, handleSubmit, formState: { errors}, reset, control} = useForm({
+        defaultValues: {
+            name: "user name",
+            email: "email@gmail.com",
+            address: "address"
+        },
+        resolver: yupResolver(validationSchema),
+        // mode: "onBlur"
+    });
 
-    // const reducer = (state, action)=> {
-    //     switch (action.type) {
-    //         case Increment:
-    //             return {
-    //                 ...state,
-    //                 value: state.value + 1
-    //             };
-    //         case Decrement:
-    //             return {
-    //                 ...state,
-    //                 value: state.value - 1
-    //             };
-    //         default:
-    //             return state;
-    //     }
-    // }
-    // const initialState = {
-    //     value: 1,
-    //     counterId: 10,
-    // };
-    // const [state, dispatch] = useReducer(reducer, initialState);
-    //
-    // const handleIncrement = ()=> {
-    //     dispatch(increment());
-    // }
-    // const handleDecrement = ()=> {
-    //     dispatch(decrement());
-    // }
-
-    // const dispatch = useDispatch();
-    // const isAuth = useSelector(state => state.auth.isAuth);
-    //
-    //
-    // const handleLogin = ()=> {
-    //     dispatch(login());
-    // }
-    // const handleLogout = ()=> {
-    //     dispatch(logout());
-    // }
-
+    const onSubmit = (data) => {
+        console.log(data);
+        reset();
+    }
 
 
     return (
         <div>
-            {/*<div>*/}
-            {/*    <h1>Count: {state.value}</h1>*/}
-            {/*    <button onClick={handleIncrement}>Increment</button>*/}
-            {/*    <button onClick={handleDecrement}>Decrement</button>*/}
-            {/*</div>*/}
+            {/*<Form/>*/}
 
-            {/*{isAuth ?*/}
-            {/*    <button onClick={handleLogout}>Logout</button> :*/}
-            {/*    <button onClick={handleLogin}>Login</button>*/}
-            {/*}*/}
 
-            <nav>
-                {/*<NavLink to="/menu">Menu</NavLink>*/}
-                {/*<NavLink to="/cart">Cart</NavLink>*/}
-                <NavLink to="/users">Users</NavLink>
-                <NavLink to="/todos">Todos</NavLink>
-                <NavLink to="/posts">Posts</NavLink>
-            </nav>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Controller
+                    name="name"
+                    control={control}
+                    render={({field, fieldState: {error}}) => <Input {...field} error={error.message} placeholder="name"/>}
+                />
 
-            <Routes>
-                <Route path="/users" element={<Users />}></Route>
-                <Route path="/todos" element={<Todos />}></Route>
-                <Route path="/posts" element={<Posts />}></Route>
+                <Controller name="email" control={control} render={({field}) => <Input {...field} placeholder="email"/>} />
 
-                {/*<Route path="/menu" element={<Menu />}></Route>*/}
-                {/*<Route path="/cart" element={<Cart />}></Route>*/}
-            </Routes>
+                <Controller name="address" control={control} render={({field}) => <Input {...field} placeholder="address"/>} />
+
+
+                {/*<input {...register("name")} type="text" placeholder="name"/>*/}
+                {/*{errors.name && <div>{errors.name.message}</div>}*/}
+
+                {/*<input {...register("email")} type="email" placeholder="email"/>*/}
+                {/*{errors.email && <div>{errors.email.message}</div>}*/}
+
+                {/*<input {...register("address")} type="text" placeholder="address"/>*/}
+                {/*{errors.address && <div>{errors.address.message}</div>}*/}
+
+                <button type="submit">Submit</button>
+            </form>
         </div>
     );
 }
