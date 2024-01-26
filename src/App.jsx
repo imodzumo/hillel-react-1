@@ -32,7 +32,7 @@ const App = () => {
                 <Controller
                     name="name"
                     control={control}
-                    render={({field, fieldState: {error}}) => <Input {...field} error={error.message} placeholder="name"/>}
+                    render={({field, fieldState: {error}}) => <Input {...field} error={error} placeholder="name"/>}
                 />
 
                 <Controller name="email" control={control} render={({field}) => <Input {...field} placeholder="email"/>} />

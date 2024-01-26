@@ -1,13 +1,22 @@
+import { forwardRef } from 'react';
 
-const Input = (props)=> {
-	const {value, onChange, onBlur, name, ref, placeholder, error} = props
+const Input = forwardRef((props, ref) => {
+	const { onChange, onBlur, name, value, placeholder, error } = props;
 
 	return (
 		<div>
-			<input type="text" placeholder={placeholder} ref={ref} value={value} onBlur={onBlur} onChange={onChange} name={name} />
-			{error && <div>{error}</div>}
+			<input
+				type="text"
+				placeholder={placeholder}
+				ref={ref}
+				value={value}
+				onBlur={onBlur}
+				onChange={onChange}
+				name={name}
+			/>
+			{error && <div>{error.message}</div>}
 		</div>
 	);
-}
+});
 
 export default Input;
