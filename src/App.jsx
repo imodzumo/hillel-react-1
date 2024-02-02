@@ -1,56 +1,35 @@
-import './App.css'
-import Form from "./components/Form.jsx";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import {validationSchema} from "./validationSchema.js";
-import Input from "./components/Input.jsx";
+import './App.module.scss'
+import {NavLink, Route, Routes} from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import About from "./pages/About.jsx";
+import Contacts from "./pages/Contacts.jsx";
+import {lazy, Suspense} from "react";
+
+
+const HomeLazy = lazy(()=> import("./pages/Home"))
+const ContactsLazy = lazy(()=> import("./pages/Contacts"))
+const AboutLazy = lazy(()=> import("./pages/About"))
 
 
 const App = () => {
-    const {register, handleSubmit, formState: { errors}, reset, control} = useForm({
-        defaultValues: {
-            name: "user name",
-            email: "email@gmail.com",
-            address: "address"
-        },
-        resolver: yupResolver(validationSchema),
-        // mode: "onBlur"
-    });
 
-    const onSubmit = (data) => {
-        console.log(data);
-        reset();
-    }
 
 
     return (
         <div>
-            {/*<Form/>*/}
+            <nav>
+                <NavLink to="/" >Home</NavLink>
+                <NavLink to="/about" >About</NavLink>
+                <NavLink to="/contacts" >Contacts</NavLink>
+            </nav>
 
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Controller
-                    name="name"
-                    control={control}
-                    render={({field, fieldState: {error}}) => <Input {...field} error={error} placeholder="name"/>}
-                />
-
-                <Controller name="email" control={control} render={({field}) => <Input {...field} placeholder="email"/>} />
-
-                <Controller name="address" control={control} render={({field}) => <Input {...field} placeholder="address"/>} />
-
-
-                {/*<input {...register("name")} type="text" placeholder="name"/>*/}
-                {/*{errors.name && <div>{errors.name.message}</div>}*/}
-
-                {/*<input {...register("email")} type="email" placeholder="email"/>*/}
-                {/*{errors.email && <div>{errors.email.message}</div>}*/}
-
-                {/*<input {...register("address")} type="text" placeholder="address"/>*/}
-                {/*{errors.address && <div>{errors.address.message}</div>}*/}
-
-                <button type="submit">Submit</button>
-            </form>
+            <Suspense fallback={<h1>Loading...</h1>}>
+                <Routes>
+                    <Route path="/" element={<HomeLazy/>} />
+                    <Route path="/about" element={<AboutLazy/>} />
+                    <Route path="/contacts" element={<ContactsLazy/>} />
+                </Routes>
+            </Suspense>
         </div>
     );
 }
