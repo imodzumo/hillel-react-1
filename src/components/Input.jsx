@@ -1,25 +1,11 @@
-import { forwardRef } from 'react';
-import {useController} from "react-hook-form";
+import {forwardRef} from "react";
 
-const Input = ((props) => {
-	// const { onChange, onBlur, name, value, placeholder, error } = props;
-
-	const {field, fieldState} = useController(props)
+const Input = forwardRef((props, ref) => {
 
 
 	return (
 		<div>
-			{/*<input*/}
-			{/*	type="text"*/}
-			{/*	placeholder={placeholder}*/}
-			{/*	ref={ref}*/}
-			{/*	value={value}*/}
-			{/*	onBlur={onBlur}*/}
-			{/*	onChange={onChange}*/}
-			{/*	name={name}*/}
-			{/*/>*/}
-			{/*{error && <div>{error.message}</div>}*/}
-			<input type="text" {...field}/>
+			<input type="text" placeholder="Enter text" ref={ref}/>
 		</div>
 	);
 });

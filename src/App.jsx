@@ -1,35 +1,62 @@
-import './App.module.scss'
-import {NavLink, Route, Routes} from "react-router-dom";
-import Home from "./pages/Home.jsx";
-import About from "./pages/About.jsx";
-import Contacts from "./pages/Contacts.jsx";
-import {lazy, Suspense} from "react";
-
-
-const HomeLazy = lazy(()=> import("./pages/Home"))
-const ContactsLazy = lazy(()=> import("./pages/Contacts"))
-const AboutLazy = lazy(()=> import("./pages/About"))
+import {useEffect, useRef, useState} from "react";
+import {current} from "@reduxjs/toolkit";
+import Input from "./components/Input.jsx";
+import Modal from "./components/Modal.jsx";
+import Select from "./components/Select.jsx";
 
 
 const App = () => {
+    // const inputRef = useRef(null);
+    //
+    // useEffect(() => {
+    //     inputRef.current.focus();
+    // }, [])
 
+    // const [seconds, setSeconds] = useState(0);
+    // const [intervalId, setIntervalId] = useState(null);
+    // const intervalId = useRef(null);
+
+    // useEffect(() => {
+    //     intervalId.current = setInterval(()=> {
+    //         setSeconds(prevState => prevState + 1)
+    //
+    //     }, 1000)
+    //
+    //     return ()=> clearInterval(intervalId.current);
+    //
+    // }, [intervalId]);
+
+    // const [isShowModal, setIsShowModal] = useState(false);
+
+    const options = [
+        {id: 1, value: "user1", title: "user1"},
+        {id: 2, value: "user2", title: "user2"},
+        {id: 3, value: "user3", title: "user3"},
+        {id: 4, value: "user4", title: "user4"},
+        {id: 5, value: "user5", title: "user5"},
+        {id: 6, value: "user6", title: "user6"},
+        {id: 7, value: "user7", title: "user7"},
+        {id: 8, value: "user8", title: "user8"},
+    ]
 
 
     return (
-        <div>
-            <nav>
-                <NavLink to="/" >Home</NavLink>
-                <NavLink to="/about" >About</NavLink>
-                <NavLink to="/contacts" >Contacts</NavLink>
-            </nav>
+        // <div className="page">
+        //     {/*<input ref={inputRef} type="text" placeholder="Enter text"/>*/}
+        //     {/*Seconds: {seconds}*/}
+        //
+        //     {/*<Input ref={inputRef} />*/}
+        //
+        //
+        //     <div className="other">Other</div>
+        //     <button onClick={()=> setIsShowModal(!isShowModal)}>Show modal</button>
+        //
+        //     {isShowModal && <Modal />}
+        //
+        // </div>
 
-            <Suspense fallback={<h1>Loading...</h1>}>
-                <Routes>
-                    <Route path="/" element={<HomeLazy/>} />
-                    <Route path="/about" element={<AboutLazy/>} />
-                    <Route path="/contacts" element={<ContactsLazy/>} />
-                </Routes>
-            </Suspense>
+        <div>
+            <Select options={options} />
         </div>
     );
 }
